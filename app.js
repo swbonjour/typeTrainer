@@ -4,16 +4,21 @@ const textArr = textBlock.innerText.split('');
 const inputBlock = document.getElementById('input');
 inputBlock.focus();
 const congratulations = document.getElementById('congratulations');
-inputBlock.addEventListener('keydown', (e) => {
+const restartButton = document.getElementById('restart');
+
+inputBlock.addEventListener('keydown', handleInputBlock);
+function handleInputBlock(e) {
     if(checkComplete(textArr, inputArr)) {
         congratulations.classList.add('congratulations-complete');
+        restartButton.classList.add('restart-complete');
+        inputBlock.removeEventListener('keydown', handleInputBlock);
     }
     if(e.key == 'Backspace') {
         deleteLetter();
     }
     createLetter(e.key);
     markMistakes(checkMistakes(textArr, inputArr));
-})
+}
 
 const inputArr = [];
 const bannedKeys = ['Shift', 'Backspace', 'Control', 'Alt', 'CapsLock', 'Tab', 'Enter', 'Escape', 'Meta', 'ContextMenu'];
@@ -65,8 +70,21 @@ function markMistakes(mistakesArr) {
 }
 
 function checkComplete(textArr, inputArr) {
+    console.log(textArr.length, inputArr.length)
     if(textArr.length - 1 == inputArr.length) {
         return true;
     }
     return false;
+}
+
+restartButton.addEventListener('click', (e) => {
+    restart();
+});
+function restart() {
+    inputBlock.innerHTML = '';
+    inputArr.length = 0;
+    inputBlock.focus();
+    congratulations.classList.remove('congratulations-complete');
+    restartButton.classList.remove('restart-complete');
+    inputBlock.addEventListener('keydown', handleInputBlock);
 }
