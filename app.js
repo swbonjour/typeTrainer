@@ -1,13 +1,24 @@
+import './textGenerator.js'
+
 const textBlock = document.getElementById('text');
-const textArr = textBlock.innerText.split('');
+let textArr = textBlock.innerText.split('');
 
 const inputBlock = document.getElementById('input');
 inputBlock.focus();
 const congratulations = document.getElementById('congratulations');
 const restartButton = document.getElementById('restart');
 
+const numberOfWordsInput = document.getElementById('numberOfWords');
+numberOfWordsInput.addEventListener('input', (e) => {
+    textArr = textBlock.innerText.split('');
+    inputBlock.innerHTML = '';
+    mistakesArr.length = 0;
+    inputArr.length = 0;
+})
+
 inputBlock.addEventListener('keydown', handleInputBlock);
 function handleInputBlock(e) {
+    inputBlock.scrollTop = inputBlock.scrollHeight;
     if(checkComplete(textArr, inputArr)) {
         congratulations.classList.add('congratulations-complete');
         restartButton.classList.add('restart-complete');
@@ -64,6 +75,9 @@ function markMistakes(mistakesArr) {
     for(let i = 0; i < mistakesArr.length; i++) {
         if(!letters[mistakesArr[i]].classList.contains('letter-mistake')) {
             letters[mistakesArr[i]].classList.add('letter-mistake');
+        }
+        if(!letters[mistakesArr[i]].classList.contains('space-mistake') && letters[mistakesArr[i]].innerHTML == '&nbsp;') {
+            letters[mistakesArr[i]].classList.add('space-mistake');
         }
     }
     return;

@@ -10,14 +10,20 @@
 <body>
     <div class="content">
         <div class="text">
-            <p class="text__value" id="text">
-                Aboba aboba aboba aboba
-            </p>
+            <p class="text__value" id="text"></p>
         </div>
-        <div class="input" id="input" tabindex="0"></div>
+        <div class="input__wrapper">
+            <div class="input" id="input" tabindex="0"></div>
+            <div class="settings">
+                <div class="settings__words-wrapper">
+                    <p class="settings__words-amount">Number of words</p>
+                    <input type="text" onkeyup="this.value = this.value.replace(/[a-z]/, '')" class="settings__words" id="numberOfWords" placeholder="10">
+                </div>
+            </div>
+        </div>
         <p class="congratulations" id="congratulations">Congatulations! Text complete!</p>
         <img src="./restart-svgrepo-com.svg" alt="restart" class="restart" id="restart">
     </div>
 </body>
-<script src="app.js"></script>
+<script src="app.js" type="module"></script>
 </html>
