@@ -8,6 +8,13 @@ const numberOfWordsInput = document.getElementById('numberOfWords');
 let numberOfWords = 10;
 numberOfWordsInput.addEventListener('input', (e) => {
     numberOfWords = numberOfWordsInput.value;
+    if(numberOfWords > 50) {
+        numberOfWords %= 50;
+        numberOfWordsInput.value = numberOfWords;
+    }
+    if(numberOfWords == '') {
+        numberOfWords = 10;
+    }
     textBlock.innerHTML = '';
     insertText();
 })
