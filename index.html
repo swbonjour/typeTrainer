@@ -17,7 +17,7 @@
             <div class="settings">
                 <div class="settings__words-wrapper">
                     <p class="settings__words-amount">Number of words</p>
-                    <input type="text" onkeyup="this.value = this.value.replace(/[a-z]/, '')" class="settings__words" id="numberOfWords" placeholder="10 (max 50)">
+                    <input type="text" onkeyup="this.value = this.value.replace(/[^0-9]/, '')" class="settings__words" id="numberOfWords" placeholder="10 (max 50)">
                 </div>
             </div>
         </div>

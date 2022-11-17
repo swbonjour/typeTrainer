@@ -6,13 +6,15 @@ const randomWordsArr = randomWords.split(' ');
 const wordsAmount = randomWordsArr.length - 1;
 const numberOfWordsInput = document.getElementById('numberOfWords');
 let numberOfWords = 10;
+const re = new RegExp(/[a-z]/, 'i');
 numberOfWordsInput.addEventListener('input', (e) => {
     numberOfWords = numberOfWordsInput.value;
+    console.log(numberOfWords);
     if(numberOfWords > 50) {
         numberOfWords %= 50;
         numberOfWordsInput.value = numberOfWords;
     }
-    if(numberOfWords == '') {
+    if(numberOfWords == '' || !numberOfWords.match(/[0-9]/)) {
         numberOfWords = 10;
     }
     textBlock.innerHTML = '';
