@@ -18,6 +18,21 @@ numberOfWordsInput.addEventListener('input', (e) => {
     inputArr.length = 0;
 })
 
+const selectedLangEng = document.getElementById('settingsLangEng');
+const selectedLangRu = document.getElementById('settingsLangRu');
+selectedLangEng.addEventListener('click', (e) => {
+    textArr = textBlock.innerText.split('');
+    inputBlock.innerHTML = '';
+    mistakesArr.length = 0;
+    inputArr.length = 0;
+})
+selectedLangRu.addEventListener('click', (e) => {
+    textArr = textBlock.innerText.split('');
+    inputBlock.innerHTML = '';
+    mistakesArr.length = 0;
+    inputArr.length = 0;
+})
+
 inputBlock.addEventListener('keydown', handleInputBlock);
 let started = false;
 let startTime = 0;
@@ -50,6 +65,7 @@ function handleInputBlock(e) {
         mistakesAmount = 0;
         congratulations.classList.add('congratulations-complete');
         restartButton.classList.add('restart-complete');
+        document.documentElement.scrollTop = document.documentElement.scrollHeight;
         inputBlock.removeEventListener('keydown', handleInputBlock);
     }
     if(e.key == 'Backspace') {

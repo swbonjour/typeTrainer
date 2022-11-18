@@ -18,6 +18,14 @@
                 <div class="settings__words-wrapper">
                     <p class="settings__words-amount">Number of words</p>
                     <input type="text" onkeyup="this.value = this.value.replace(/[^0-9]/, '')" class="settings__words" id="numberOfWords" placeholder="10 (max 50)">
+                    <p class="settings__lang-p">Language</p>
+                    <div class="settings__lang" id="settingsLang">
+                        <p class="settings__lang-selected" id="settingsLangSelected">English</p>
+                        <div class="settings__lang-wrapper">
+                            <div class="settings__lang-eng settings__lang-item" id="settingsLangEng">English</div>
+                            <div class="settings__lang-ru settings__lang-item" id="settingsLangRu">Russian</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
