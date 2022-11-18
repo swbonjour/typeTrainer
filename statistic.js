@@ -4,7 +4,7 @@ export function countSPS(isCompleted, startTime, finishTime, symbolsAmount) {
         if(sps == Infinity) {
             return symbolsAmount;
         }
-        return sps;
+        return Math.floor(sps);
     }
 }
 
@@ -14,6 +14,14 @@ export function countWPM(isCompleted, startTime, finishTime, wordsAmount) {
         if(wpm == Infinity) {
             return wordsAmount;
         }
-        return wpm;
+        return Math.floor(wpm);
     }
+}
+
+export function countAccuracy(mistakesAmount, symbolsAmount) {
+    const acc = 100 - (mistakesAmount / symbolsAmount) * 100;
+    if(acc < 0) {
+        return 0;
+    }
+    return acc;
 }

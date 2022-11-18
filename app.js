@@ -1,6 +1,6 @@
 import './textGenerator.js'
 import './statistic.js'
-import { countSPS, countWPM } from './statistic.js';
+import { countAccuracy, countSPS, countWPM } from './statistic.js';
 
 const textBlock = document.getElementById('text');
 let textArr = textBlock.innerText.split('');
@@ -23,8 +23,10 @@ let started = false;
 let startTime = 0;
 let finishTime = 0;
 let wordsAmount = 0;
+let mistakesAmount = 0;
 const spsBlock = document.getElementById('statistic-sps');
 const wpmBlock = document.getElementById('statistic-wpm');
+const acrBlock = document.getElementById('statistic-acr');
 function handleInputBlock(e) {
     inputBlock.scrollTop = inputBlock.scrollHeight;
     if(!started) {
@@ -32,6 +34,9 @@ function handleInputBlock(e) {
         startTime = Date.now();
         wordsAmount = textArr.filter(word => word == ' ').length + 1;
     }
+    createLetter(e.key);
+    markMistakes(checkMistakes(textArr, inputArr));
+    mistakesAmount += mistakesArr.length;
     const completed = checkComplete(textArr, inputArr);
     if(completed) {
         finishTime = Date.now();
@@ -39,7 +44,10 @@ function handleInputBlock(e) {
         spsBlock.innerHTML = sps;
         const wpm = countWPM(completed, startTime, finishTime, wordsAmount);
         wpmBlock.innerHTML = wpm;
+        const accuracy = countAccuracy(mistakesAmount, inputArr.length + 1);
+        acrBlock.innerHTML = `${accuracy}%`;
         started = false;
+        mistakesAmount = 0;
         congratulations.classList.add('congratulations-complete');
         restartButton.classList.add('restart-complete');
         inputBlock.removeEventListener('keydown', handleInputBlock);
@@ -47,8 +55,6 @@ function handleInputBlock(e) {
     if(e.key == 'Backspace') {
         deleteLetter();
     }
-    createLetter(e.key);
-    markMistakes(checkMistakes(textArr, inputArr));
 }
 
 const inputArr = [];
@@ -105,7 +111,7 @@ function markMistakes(mistakesArr) {
 
 function checkComplete(textArr, inputArr) {
     console.log(textArr.length, inputArr.length)
-    if(textArr.length - 1 == inputArr.length) {
+    if(textArr.length == inputArr.length) {
         return true;
     }
     return false;
@@ -117,6 +123,7 @@ restartButton.addEventListener('click', (e) => {
 function restart() {
     inputBlock.innerHTML = '';
     inputArr.length = 0;
+    mistakesArr.length = 0;
     inputBlock.focus();
     congratulations.classList.remove('congratulations-complete');
     restartButton.classList.remove('restart-complete');
