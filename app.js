@@ -1,4 +1,6 @@
 import './textGenerator.js'
+import './statistic.js'
+import { countSPS, countWPM } from './statistic.js';
 
 const textBlock = document.getElementById('text');
 let textArr = textBlock.innerText.split('');
@@ -17,9 +19,27 @@ numberOfWordsInput.addEventListener('input', (e) => {
 })
 
 inputBlock.addEventListener('keydown', handleInputBlock);
+let started = false;
+let startTime = 0;
+let finishTime = 0;
+let wordsAmount = 0;
+const spsBlock = document.getElementById('statistic-sps');
+const wpmBlock = document.getElementById('statistic-wpm');
 function handleInputBlock(e) {
     inputBlock.scrollTop = inputBlock.scrollHeight;
-    if(checkComplete(textArr, inputArr)) {
+    if(!started) {
+        started = true;
+        startTime = Date.now();
+        wordsAmount = textArr.filter(word => word == ' ').length + 1;
+    }
+    const completed = checkComplete(textArr, inputArr);
+    if(completed) {
+        finishTime = Date.now();
+        const sps = countSPS(completed, startTime, finishTime, textArr.length);
+        spsBlock.innerHTML = sps;
+        const wpm = countWPM(completed, startTime, finishTime, wordsAmount);
+        wpmBlock.innerHTML = wpm;
+        started = false;
         congratulations.classList.add('congratulations-complete');
         restartButton.classList.add('restart-complete');
         inputBlock.removeEventListener('keydown', handleInputBlock);

@@ -144,3 +144,12 @@ body {
 .restart-complete {
     display: block;
 }
+
+.statistic__wrapper {
+    width: 100%;
+    display: flex;
+    font-size: calc(16px + 32 * (100vw / 1440));
+    color: rgb(212, 190, 152);
+    gap: 2rem;
+    margin-top: 2rem;
+}
