@@ -24,6 +24,7 @@ selectedLangEng.addEventListener('click', (e) => {
     selectedLangEng.classList.remove('settings__lang-item__active');
     selectedLangRu.classList.remove('settings__lang-item__active');
     randomWords = randomWordsEng;
+    randomWords = randomWords.replace(/\./g, '');
     textBlock.innerHTML = ''
     randomWordsArr = randomWords.split(' ');
     wordsAmount = randomWordsArr.length - 1;
@@ -34,6 +35,7 @@ selectedLangRu.addEventListener('click', (e) => {
     selectedLangEng.classList.remove('settings__lang-item__active');
     selectedLangRu.classList.remove('settings__lang-item__active');
     randomWords = randomWordsRu;
+    randomWords = randomWords.replace(/\./g, '');
     textBlock.innerHTML = '';
     randomWordsArr = randomWords.split(' ');
     wordsAmount = randomWordsArr.length - 1;
@@ -49,7 +51,6 @@ let numberOfWords = 10;
 const re = new RegExp(/[^0-9]/, 'g');
 numberOfWordsInput.addEventListener('input', (e) => {
     numberOfWords = numberOfWordsInput.value;
-    console.log(typeof(numberOfWords));
     if(numberOfWords > 50) {
         numberOfWords %= 50;
         numberOfWordsInput.value = numberOfWords;
