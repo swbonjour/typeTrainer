@@ -1,6 +1,6 @@
 import './textGenerator.js'
 import './statistic.js'
-import { countAccuracy, countSPS, countWPM } from './statistic.js';
+import { countAccuracy, countSPS, countWPM, getTime } from './statistic.js';
 
 const textBlock = document.getElementById('text');
 let textArr = textBlock.innerText.split('');
@@ -39,9 +39,11 @@ let startTime = 0;
 let finishTime = 0;
 let wordsAmount = 0;
 let mistakesAmount = 0;
+let timer = 0;
 const spsBlock = document.getElementById('statistic-sps');
 const wpmBlock = document.getElementById('statistic-wpm');
 const acrBlock = document.getElementById('statistic-acr');
+const timerBlock = document.getElementById('statistic-timer');
 function handleInputBlock(e) {
     inputBlock.scrollTop = inputBlock.scrollHeight;
     if(!started) {
@@ -72,6 +74,13 @@ function handleInputBlock(e) {
         deleteLetter();
     }
 }
+
+setInterval(() => {
+    if(started) {
+        timer = getTime(startTime);
+        timerBlock.innerHTML = timer;
+    }
+})
 
 const inputArr = [];
 const bannedKeys = ['Shift', 'Backspace', 'Control', 'Alt', 'CapsLock', 'Tab', 'Enter', 'Escape', 'Meta', 'ContextMenu'];

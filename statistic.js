@@ -25,3 +25,11 @@ export function countAccuracy(mistakesAmount, symbolsAmount) {
     }
     return acc;
 }
+
+export function getTime(startTime) {
+    const time = Date.now();
+    const timeDiff = time - startTime;
+    const minutes = Math.floor(timeDiff / 1000 / 60) % 60;
+    const seconds = Math.floor(timeDiff / 1000) % 60;
+    return `${minutes}:${seconds}`
+}
